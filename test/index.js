@@ -145,3 +145,33 @@ describe('decoding int32', function() {
     assert.equal(a[0].toString(), b.toString())
   })
 })
+
+describe('decoding bool, uint32', function() {
+  it('should equal', function() {
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'bool', 'uint32' ], new Buffer('ae4f88b10000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
+    assert.equal(a.length, 2)
+    assert.equal(a[0], true)
+    assert.equal(a[1].toString(), new BN(42).toString())
+  })
+})
+
+describe('decoding bool, uint256[]', function() {
+  it('should equal', function() {
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'bool', 'uint256[]' ], new Buffer('ae4f88b1000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
+    assert.equal(a.length, 2)
+    assert.equal(a[0], true)
+    assert.equal(a[1].length, 1)
+    assert.equal(a[1][0].toString(), new BN(42).toString())
+  })
+})
+
+describe('decoding uint256[], bool', function() {
+  it('should equal', function() {
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'uint256[]', 'bool' ], new Buffer('ae4f88b1000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
+console.log(a);
+    assert.equal(a.length, 2)
+    assert.equal(a[1], true)
+    assert.equal(a[0].length, 1)
+    assert.equal(a[0][0].toString(), new BN(42).toString())
+  })
+})
