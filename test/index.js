@@ -1,6 +1,7 @@
 var assert = require('assert')
 var ABI = require('../index.js')
 var abi = new ABI()
+var BN = require("bn.js")
 
 // Official test vectors from https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI
 
@@ -82,5 +83,65 @@ describe('encoding bytes33', function() {
       assert.fail();
     } catch(error) {
     }
+  })
+})
+
+
+// Homebrew decoding tests
+
+describe('decoding uint32', function() {
+  it('should equal', function() {
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'uint32' ], new Buffer('ae4f88b1000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
+    var b = new BN(42)
+    assert.equal(a.length, 1)
+    assert.equal(a[0].toString(), b.toString())
+  })
+})
+
+describe('decoding uint256[]', function() {
+  it('should equal', function() {
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'uint256[]' ], new Buffer('ae4f88b100000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003', 'hex'))
+    var b = new BN(1)
+    var c = new BN(2)
+    var d = new BN(3)
+
+    assert.equal(a.length, 1)
+    assert.equal(a[0].length, 3)
+    assert.equal(a[0][0].toString(), b.toString())
+    assert.equal(a[0][1].toString(), c.toString())
+    assert.equal(a[0][2].toString(), d.toString())
+  })
+})
+
+describe('decoding bytes', function() {
+  it('should equal', function() {
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'bytes' ], new Buffer('ae4f88b10000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000b68656c6c6f20776f726c64000000000000000000000000000000000000000000', 'hex'))
+    var b = new Buffer('68656c6c6f20776f726c64', 'hex')
+
+    assert.equal(a.length, 1)
+    assert.equal(a[0].toString(), b.toString())
+  })
+})
+
+describe('decoding string', function() {
+  it('should equal', function() {
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'string' ], new Buffer('ae4f88b10000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000b68656c6c6f20776f726c64000000000000000000000000000000000000000000', 'hex'))
+    var b = 'hello world'
+    assert.equal(a.length, 1)
+    assert.equal(a[0], b)
+  })
+})
+
+describe('decoding int32', function() {
+  it('should equal', function() {
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'int32' ], new Buffer('ae4f88b1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe', 'hex'))
+    var b = new BN(-2);
+    assert.equal(a.length, 1)
+    assert.equal(a[0].toString(), b.toString());
+
+    var a = abi.rawDecode('neg', [ 'int32' ], [ 'int32' ], new Buffer('ae4f88b1ffffffffffffffffffffffffffffffffffffffffffffffffffffb29c26f344fe', 'hex'))
+    var b = new BN(-85091238591234)
+    assert.equal(a.length, 1)
+    assert.equal(a[0].toString(), b.toString())
   })
 })
