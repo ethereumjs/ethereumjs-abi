@@ -84,6 +84,38 @@ describe('encoding bytes33', function() {
   })
 })
 
+describe('encoding uint0', function() {
+  it('should fail', function() {
+    assert.throws(function() {
+      abi.rawEncode('fail', [ 'uint0' ], [ 1 ])
+    }, Error)
+  })
+})
+
+describe('encoding uint257', function() {
+  it('should fail', function() {
+    assert.throws(function() {
+      abi.rawEncode('fail', [ 'uint257' ], [ 1 ])
+    }, Error)
+  })
+})
+
+describe('encoding int0', function() {
+  it('should fail', function() {
+    assert.throws(function() {
+      abi.rawEncode('fail', [ 'int0' ], [ 1 ])
+    }, Error);
+  })
+})
+
+describe('encoding int257', function() {
+  it('should fail', function() {
+    assert.throws(function() {
+      abi.rawEncode('fail', [ 'int257' ], [ 1 ])
+    }, Error)
+  })
+})
+
 
 // Homebrew decoding tests
 
