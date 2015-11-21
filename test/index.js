@@ -78,11 +78,9 @@ describe('encoding string response (unsupported)', function() {
 
 describe('encoding bytes33', function() {
   it('should fail', function() {
-    try {
-      abi.rawEncode('fail', [ 'bytes33' ], [ '' ]);
-      assert.fail();
-    } catch(error) {
-    }
+    assert.throws(function() {
+      abi.rawEncode('fail', [ 'bytes33' ], [ '' ])
+    }, Error)
   })
 })
 
