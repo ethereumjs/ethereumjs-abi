@@ -116,6 +116,13 @@ describe('encoding int257', function() {
   })
 })
 
+describe('encoding uint[2] with [1,2,3]', function() {
+  it('should fail', function() {
+    assert.throws(function() {
+      abi.rawEncode('fail', [ 'uint[2]' ], [ [ 1, 2, 3 ] ])
+    }, Error)
+  })
+})
 
 // Homebrew decoding tests
 
