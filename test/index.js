@@ -179,6 +179,11 @@ describe('decoding int32', function() {
     assert.equal(a.length, 1)
     assert.equal(a[0].toString(), b.toString())
   })
+  it('should fail', function() {
+    assert.throws(function() {
+      abi.rawDecode('neg', [ 'int32' ], [ 'int32' ], new Buffer('ae4f88b1ffffffffffffffffffffffffffffffffffffffffffffffffffffb29c26f344fe', 'hex'))
+    }, Error)
+  })
 })
 
 describe('decoding bool, uint32', function() {
