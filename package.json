@@ -9,6 +9,9 @@
     "ethereumjs-util": "^2.2.0",
     "utf8": "2.1.1"
   },
+  "devDependencies": {
+    "mocha": "^2.1.0",
+  },
   "scripts": {
     "test": "mocha ./test/"
   },
