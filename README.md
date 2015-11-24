@@ -39,7 +39,7 @@ var encoded = ABI.encode(tokenAbi, "balanceOf(uint256 address)", [ "0x0000000000
 var decoded = ABI.decode(tokenAbi, "balanceOf(uint256 address)", data)
 ```
 
-#### Solidity 'tightly packed' formats
+#### Solidity *tightly packed* formats
 
 This library also supports creating Solidity's tightly packed data constructs, which are used together with ```sha3```, ```sha256``` and ```ripemd160``` to create hashes.
 
