@@ -21,7 +21,6 @@ describe('official test vector 2 (encoding)', function() {
   })
 })
 
-
 describe('official test vector 3 (encoding)', function() {
   it('should equal', function() {
     var a = abi.rawEncode('sam', [ 'bytes', 'bool', 'uint256[]' ], [ 'dave', true, [ 1, 2, 3 ] ]).toString('hex')
@@ -37,7 +36,6 @@ describe('official test vector 4 (encoding)', function() {
     assert.equal(a, b)
   })
 })
-
 
 // Homebrew tests
 
@@ -72,7 +70,6 @@ describe('encoding string response (unsupported)', function() {
     assert.equal(a, b)
   })
 })
-
 
 describe('encoding bytes33', function() {
   it('should fail', function() {
@@ -174,8 +171,8 @@ describe('decoding int32', function() {
     assert.equal(a.length, 1)
     assert.equal(a[0].toString(), b.toString());
 
-    var a = abi.rawDecode('neg', [ 'int32' ], [ 'int64' ], new Buffer('ae4f88b1ffffffffffffffffffffffffffffffffffffffffffffffffffffb29c26f344fe', 'hex'))
-    var b = new BN(-85091238591234)
+    a = abi.rawDecode('neg', [ 'int32' ], [ 'int64' ], new Buffer('ae4f88b1ffffffffffffffffffffffffffffffffffffffffffffffffffffb29c26f344fe', 'hex'))
+    b = new BN(-85091238591234)
     assert.equal(a.length, 1)
     assert.equal(a[0].toString(), b.toString())
   })
