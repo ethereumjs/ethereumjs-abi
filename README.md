@@ -4,6 +4,8 @@ Module implementing the [Ethereum ABI](https://github.com/ethereum/wiki/wiki/Eth
 
 ## Usage
 
+#### Manual encoding and decoding
+
 There are two methods of interest, ```rawEncode``` to encode a call (name plus arguments) and ```rawDecode``` to decode a response for a specific encoded query.
 
 Example code:
@@ -21,6 +23,7 @@ var decoded = abi.rawDecode("balanceOf", [ "address" ], [ "uint256" ], data);
 
 For preparing encoded blocks without the signature, use ```rawEncodeResponse```. This can be useful when interfacing with contracts as a data provider.
 
+#### Encoding and decoding aided by the JSON ABI definition
 
 Planned for the future is supporting the JSON ABI definition:
 
@@ -36,6 +39,40 @@ var encoded = ABI.encode(tokenAbi, "balanceOf(uint256 address)", [ "0x0000000000
 var decoded = ABI.decode(tokenAbi, "balanceOf(uint256 address)", data);
 ```
 
+#### Solidity 'tightly packed' formats
+
+This library also supports creating Solidity's tightly packed data constructs, which are used together with ```sha3```, ```sha256``` and ```ripemd160``` to create hashes.
+
+Solidity code:
+```js
+contract HashTest {
+  function testSha3() returns (bytes32) {
+   address addr1 = 0x43989fb883ba8111221e89123897538475893837;
+   address addr2 = 0;
+   uint val = 10000;
+   uint timestamp = 1448075779;
+
+   return sha3(addr1, addr2, val, timestamp); // will return 0xc3ab5ca31a013757f26a88561f0ff5057a97dfcc33f43d6b479abc3ac2d1d595
+ }
+}
+```
+
+Creating the same hash using this library:
+```js
+var ABI = require('ethereumjs-abi')
+var abi = new ABI()
+var BN = require('bn.js')
+
+abi.soliditySHA3(
+    [ "address", "address", "uint", "uint" ],
+    [ new BN("43989fb883ba8111221e89123897538475893837", 16), 0, 10000, 1448075779 ]
+).toString('hex')
+```
+
+For the same data structure:
+* sha3 will return ```0xc3ab5ca31a013757f26a88561f0ff5057a97dfcc33f43d6b479abc3ac2d1d595```
+* sha256 will return ```0x344d8cb0711672efbdfe991f35943847c1058e1ecf515ff63ad936b91fd16231```
+* ripemd160 will return ```0x000000000000000000000000a398cc72490f72048efa52c4e92067e8499672e7``` (NOTE: it is 160bits, left padded to 256bits)
 
 ## Contributing
 
