@@ -10,15 +10,15 @@ There are two methods of interest, ```rawEncode``` to encode a call (name plus a
 
 Example code:
 ```js
-var ABI = require('ethereumjs-abi');
-var abi = new ABI();
+var ABI = require('ethereumjs-abi')
+var abi = new ABI()
 
 // returns the encoded binary (as a Buffer) data to be sent
-var encoded = abi.rawEncode("balanceOf", [ "address" ], [ "0x0000000000000000000000000000000000000000" ]);
+var encoded = abi.rawEncode("balanceOf", [ "address" ], [ "0x0000000000000000000000000000000000000000" ])
 
 // returns the decoded array of arguments
 // need to define the input argument list in order to select the proper function
-var decoded = abi.rawDecode("balanceOf", [ "address" ], [ "uint256" ], data);
+var decoded = abi.rawDecode("balanceOf", [ "address" ], [ "uint256" ], data)
 ```
 
 For preparing encoded blocks without the signature, use ```rawEncodeResponse```. This can be useful when interfacing with contracts as a data provider.
@@ -28,15 +28,15 @@ For preparing encoded blocks without the signature, use ```rawEncodeResponse```.
 Planned for the future is supporting the JSON ABI definition:
 
 ```js
-var ABI = require('ethereumjs-abi');
-var abi = new ABI();
+var ABI = require('ethereumjs-abi')
+var abi = new ABI()
 
 // need to have the ABI definition in JSON as per specification
-var tokenAbi = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"type":"function"},{"inputs":[],"type":"constructor"}];
+var tokenAbi = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"type":"function"},{"inputs":[],"type":"constructor"}]
 
-var encoded = ABI.encode(tokenAbi, "balanceOf(uint256 address)", [ "0x0000000000000000000000000000000000000000" ]);
+var encoded = ABI.encode(tokenAbi, "balanceOf(uint256 address)", [ "0x0000000000000000000000000000000000000000" ])
 
-var decoded = ABI.decode(tokenAbi, "balanceOf(uint256 address)", data);
+var decoded = ABI.decode(tokenAbi, "balanceOf(uint256 address)", data)
 ```
 
 #### Solidity 'tightly packed' formats
