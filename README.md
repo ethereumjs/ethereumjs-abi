@@ -74,6 +74,8 @@ For the same data structure:
 * sha256 will return ```0x344d8cb0711672efbdfe991f35943847c1058e1ecf515ff63ad936b91fd16231```
 * ripemd160 will return ```0x000000000000000000000000a398cc72490f72048efa52c4e92067e8499672e7``` (NOTE: it is 160bits, left padded to 256bits)
 
+Note that ```ripemd160()``` in Solidity returns bytes20 and if you cast it to bytes32, it will be right padded with zeroes.
+
 ## Contributing
 
 I am more than happy to receive improvements. Please send me a pull request or reach out on email or twitter.
