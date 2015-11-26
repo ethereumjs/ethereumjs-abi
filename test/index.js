@@ -47,6 +47,14 @@ describe('encoding negative int32', function() {
   });
 });
 
+describe('encoding negative int256', function() {
+  it('should equal', function() {
+    var a = abi.rawEncode('neg', [ 'int256' ], [ new BN('-19999999999999999999999999999999999999999999999999999999999999', 10) ]).toString('hex');
+    var b = '54a53dc1fffffffffffff38dd0f10627f5529bdb2c52d4846810af0ac000000000000001';
+    assert.equal(a, b);
+  });
+});
+
 describe('encoding string >32bytes', function() {
   it('should equal', function() {
     var a = abi.rawEncode('test', [ 'string' ], [ ' hello world hello world hello world hello world  hello world hello world hello world hello world  hello world hello world hello world hello world hello world hello world hello world hello world' ]).toString('hex');
