@@ -119,6 +119,14 @@ describe('encoding uint[2] with [1,2,3]', function() {
   });
 });
 
+describe('encoding uint8 with 9bit data', function() {
+  it('should fail', function() {
+    assert.throws(function() {
+      abi.rawEncode('fail', [ 'uint8' ], [ new BN(1).iushln(9) ])
+    }, Error)
+  })
+})
+
 // Homebrew decoding tests
 
 describe('decoding uint32', function() {
