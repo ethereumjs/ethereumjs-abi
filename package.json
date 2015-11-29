@@ -4,7 +4,7 @@
   "description": "Decoder and encoder for the Ethereum ABI",
   "main": "index.js",
   "dependencies": {
-    "bn.js": "^4.3.0",
+    "bn.js": "^4.4.0",
     "es6-shim": "^0.33.6",
     "ethereumjs-util": "^2.3.1",
     "utf8": "2.1.1"
