@@ -237,6 +237,24 @@ describe('decoding uint[2] with [1,2,3]', function() {
 });
 
 // Tests for Solidity's tight packing
+describe('solidity tight packing bool', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'bool' ],
+      [ true ]
+    );
+    var b = '01';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+
+    a = abi.solidityPack(
+      [ 'bool' ],
+      [ false ]
+    );
+    b = '00';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
+
 describe('solidity tight packing address', function() {
   it('should equal', function() {
     var a = abi.solidityPack(
