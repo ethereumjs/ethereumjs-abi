@@ -10,9 +10,11 @@
     "utf8": "2.1.1"
   },
   "devDependencies": {
-    "mocha": "^2.1.0"
+    "mocha": "^2.1.0",
+    "browserify": "12.0.1"
   },
   "scripts": {
+    "build": "browserify index.js -s EthAbi -o ethereumjs-abi.js",
     "test": "mocha ./test/"
   },
   "repository": {
