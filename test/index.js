@@ -237,6 +237,93 @@ describe('decoding uint[2] with [1,2,3]', function() {
 });
 
 // Tests for Solidity's tight packing
+describe('solidity tight packing address', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'address' ],
+      [ new BN('43989fb883ba8111221e89123897538475893837', 16) ]
+    );
+    var b = '43989fb883ba8111221e89123897538475893837';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
+
+describe('solidity tight packing string', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'string' ],
+      [ 'test' ]
+    );
+    var b = '74657374';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
+
+describe('solidity tight packing bytes', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'bytes' ],
+      [ new Buffer('123456', 'hex') ]
+    );
+    var b = '123456';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
+
+describe('solidity tight packing bytes8', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'bytes8' ],
+      [ new Buffer('123456', 'hex') ]
+    );
+    var b = '1234560000000000';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
+
+describe('solidity tight packing uint', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'uint' ],
+      [ 42 ]
+    );
+    var b = '000000000000000000000000000000000000000000000000000000000000002a';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
+
+describe('solidity tight packing uint16', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'uint16' ],
+      [ 42 ]
+    );
+    var b = '002a';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
+
+describe('solidity tight packing int', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'int' ],
+      [ -42 ]
+    );
+    var b = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd6';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
+
+describe('solidity tight packing int16', function() {
+  it('should equal', function() {
+    var a = abi.solidityPack(
+      [ 'int16' ],
+      [ -42 ]
+    );
+    var b = 'ffd6';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
 
 describe('solidity tight packing sha3', function() {
   it('should equal', function() {
