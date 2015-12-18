@@ -378,7 +378,7 @@ describe('solidity tight packing ripemd160', function() {
 
 describe('converting from serpent types', function() {
   it('should equal', function() {
-    assert.deepEqual(abi.fromSerpent('s'), [ 'string' ]);
+    assert.deepEqual(abi.fromSerpent('s'), [ 'bytes' ]);
     assert.deepEqual(abi.fromSerpent('b'), [ 'bytes' ]);
     assert.deepEqual(abi.fromSerpent('i'), [ 'int256' ]);
     assert.deepEqual(abi.fromSerpent('a'), [ 'int256[]' ]);
@@ -386,7 +386,7 @@ describe('converting from serpent types', function() {
     assert.deepEqual(abi.fromSerpent('b8i'), [ 'bytes8', 'int256' ]);
     assert.deepEqual(abi.fromSerpent('b32'), [ 'bytes32' ]);
     assert.deepEqual(abi.fromSerpent('b32i'), [ 'bytes32', 'int256' ]);
-    assert.deepEqual(abi.fromSerpent('sbb8ib8a'), [ 'string', 'bytes', 'bytes8', 'int256', 'bytes8', 'int256[]' ]);
+    assert.deepEqual(abi.fromSerpent('sbb8ib8a'), [ 'bytes', 'bytes', 'bytes8', 'int256', 'bytes8', 'int256[]' ]);
     assert.throws(function() {
       abi.fromSerpent('i8');
     });
@@ -401,10 +401,10 @@ describe('converting to serpent types', function() {
     assert.equal(abi.toSerpent([ 'string' ]), 's');
     assert.equal(abi.toSerpent([ 'int256' ]), 'i');
     assert.equal(abi.toSerpent([ 'int256[]' ]), 'a');
-    assert.equal(abi.toSerpent([ 'bytes' ]), 'b');
+    assert.equal(abi.toSerpent([ 'bytes' ]), 's');
     assert.equal(abi.toSerpent([ 'bytes8' ]), 'b8');
     assert.equal(abi.toSerpent([ 'bytes32' ]), 'b32');
-    assert.equal(abi.toSerpent([ 'string', 'bytes', 'bytes8', 'int256', 'bytes8', 'int256[]' ]), 'sbb8ib8a');
+    assert.equal(abi.toSerpent([ 'string', 'bytes', 'bytes8', 'int256', 'bytes8', 'int256[]' ]), 'ssb8ib8a');
     assert.throws(function() {
       abi.toSerpent('int8');
     });
