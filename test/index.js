@@ -1,6 +1,5 @@
 var assert = require('assert');
-var ABI = require('../index.js');
-var abi = new ABI();
+var abi = require('../index.js');
 var BN = require('bn.js');
 
 // Official test vectors from https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI
