@@ -581,3 +581,35 @@ describe('utf8 handling', function () {
     assert.equal(a, b[0])
   })
 })
+
+describe('encoding ufixed128x128', function () {
+  it('should equal', function () {
+    var a = abi.rawEncode([ 'ufixed128x128' ], [ 1 ]).toString('hex')
+    var b = '0000000000000000000000000000000100000000000000000000000000000000'
+    assert.equal(a, b)
+  })
+})
+
+describe('encoding fixed128x128', function () {
+  it('should equal', function () {
+    var a = abi.rawEncode([ 'fixed128x128' ], [ -1 ]).toString('hex')
+    var b = 'ffffffffffffffffffffffffffffffff00000000000000000000000000000000'
+    assert.equal(a, b)
+  })
+})
+
+describe('decoding ufixed128x128', function () {
+  it('should equal', function () {
+    var a = new Buffer('0000000000000000000000000000000100000000000000000000000000000000', 'hex')
+    var b = abi.rawDecode([ 'ufixed128x128' ], a)
+    assert.equal(b[0].toNumber(), 1)
+  })
+})
+
+describe('decoding fixed128x128', function () {
+  it('should equal', function () {
+    var a = new Buffer('ffffffffffffffffffffffffffffffff00000000000000000000000000000000', 'hex')
+    var b = abi.rawDecode([ 'fixed128x128' ], a)
+    assert.equal(b[0].toNumber(), -1)
+  })
+})
