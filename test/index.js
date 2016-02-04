@@ -377,3 +377,14 @@ describe('solidity tight packing ripemd160', function() {
     assert.equal(a.toString('hex'), b.toString('hex'));
   });
 });
+
+describe('solidity tight packing with small ints', function() {
+  it('should equal', function() {
+    var a = abi.soliditySHA3(
+      [ 'address', 'address', 'int64', 'uint192' ],
+      [ new BN('43989fb883ba8111221e89123897538475893837', 16), 0, 10000, 1448075779 ]
+    );
+    var b = '1c34bbd3d419c05d028a9f13a81a1212e33cb21f4b96ce1310442911c62c6986';
+    assert.equal(a.toString('hex'), b.toString('hex'));
+  });
+});
