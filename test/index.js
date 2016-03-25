@@ -80,6 +80,24 @@ describe('encoding string response (unsupported)', function () {
   })
 })
 
+describe('encoding', function() {
+  it('should work for uint256', function() {
+    var a = abi.rawEncode('foo', [ 'uint256' ], [ 1 ]).toString('hex')
+    var b = '2fbebd380000000000000000000000000000000000000000000000000000000000000001'
+    assert.equal(a, b)
+  })
+  it('should work for uint', function() {
+    var a = abi.rawEncode('foo', [ 'uint' ], [ 1 ]).toString('hex')
+    var b = '2fbebd380000000000000000000000000000000000000000000000000000000000000001'
+    assert.equal(a, b)
+  })
+  it('should work for int256', function() {
+    var a = abi.rawEncode('foo', [ 'int256' ], [ -1 ]).toString('hex')
+    var b = '4c970b2fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+    assert.equal(a, b)
+  })
+})
+
 describe('encoding bytes33', function () {
   it('should fail', function () {
     assert.throws(function () {
