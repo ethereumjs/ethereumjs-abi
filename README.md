@@ -73,6 +73,39 @@ For the same data structure:
 
 Note that ```ripemd160()``` in Solidity returns bytes20 and if you cast it to bytes32, it will be right padded with zeroes.
 
+#### Using Serpent types
+
+Serpent uses a different notation for the types, even though it will serialize to the same ABI.
+
+We provide two helpers to convert between these notations:
+* ```fromSerpent```: convert a Serpent notation to the ABI notation
+* ```toSerpent```: the other way around
+
+Example usage:
+```js
+abi.fromSerpent('s')    // [ 'string' ]
+abi.fromSerpent('b')    // [ 'bytes' ]
+abi.fromSerpent('i')    // [ 'int256' ]
+abi.fromSerpent('a')    // [ 'int256[]' ]
+abi.fromSerpent('b8')   // [ 'bytes8' ]
+abi.fromSerpent('b8i')  // [ 'bytes8', 'int256' ]
+
+abi.toSerpent([ 'string' ])            // 's'
+abi.toSerpent([ 'int256' ])            // 'i'
+abi.toSerpent([ 'int256[]' ])          // 'a'
+abi.toSerpent([ 'bytes' ])             // 'b'
+abi.toSerpent([ 'bytes8' ])            // 'b8'
+abi.toSerpent([ 'bytes8', 'int256' ])  // 'b8i'
+```
+
+It is to be used in conjunction with ```rawEncode``` and ```rawDecode```:
+
+```js
+var encoded = abi.rawEncode("balanceOf", abi.fromSerpent("i"), [ "0x0000000000000000000000000000000000000000" ])
+
+var decoded = abi.rawDecode("balanceOf", abi.fromSerpent("i"), abi.fromSerpent("i"), data)
+```
+
 ## Contributing
 
 I am more than happy to receive improvements. Please send me a pull request or reach out on email or twitter.
