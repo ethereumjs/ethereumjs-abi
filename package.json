@@ -10,9 +10,12 @@
   },
   "devDependencies": {
     "mocha": "^2.1.0",
-    "browserify": "12.0.1"
+    "browserify": "12.0.1",
+    "standard": "^5.4.1"
   },
   "scripts": {
+    "lint": "standard",
+    "prepublish": "npm run lint && npm run test",
     "build": "browserify index.js -s EthAbi -o ethereumjs-abi.js",
     "test": "mocha ./test/"
   },
@@ -29,5 +32,11 @@
   "bugs": {
     "url": "https://github.com/axic/ethereumjs-abi/issues"
   },
-  "homepage": "https://github.com/axic/ethereumjs-abi"
+  "homepage": "https://github.com/axic/ethereumjs-abi",
+  "standard": {
+    "globals": [
+      "describe",
+      "it"
+    ]
+  }
 }
