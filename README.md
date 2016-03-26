@@ -1,5 +1,13 @@
 # ethereumjs-abi
 
+[![NPM Package](https://img.shields.io/npm/v/ethereumjs-abi.svg?style=flat-square)](https://www.npmjs.org/package/ethereumjs-abi)
+[![Build Status](https://img.shields.io/travis/ethereumjs/ethereumjs-abi.svg?branch=master&style=flat-square)](https://travis-ci.org/ethereumjs/ethereumjs-abi)
+[![Coverage Status](https://img.shields.io/coveralls/ethereumjs/ethereumjs-abi.svg?style=flat-square)](https://coveralls.io/r/ethereumjs/ethereumjs-abi)
+[![Gitter](https://img.shields.io/gitter/room/ethereum/ethereumjs-lib.svg?style=flat-square)](https://gitter.im/ethereum/ethereumjs-lib) or #ethereumjs on freenode
+
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
+
 Module implementing the [Ethereum ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) in Javascript. Can be used with RPC libraries for communication or with ethereumjs-vm to implement a fully fledged simulator.
 
 ## Usage

@@ -9,15 +9,19 @@
     "utf8": "2.1.1"
   },
   "devDependencies": {
-    "mocha": "^2.1.0",
     "browserify": "12.0.1",
+    "coveralls": "^2.11.4",
+    "istanbul": "^0.4.1",
+    "mocha": "^2.1.0",
     "standard": "^5.4.1"
   },
   "scripts": {
+    "coverage": "istanbul cover _mocha",
+    "coveralls": "npm run coverage && coveralls <coverage/lcov.info",
     "lint": "standard",
     "prepublish": "npm run lint && npm run test",
     "build": "browserify index.js -s EthAbi -o ethereumjs-abi.js",
-    "test": "mocha ./test/"
+    "test": "istanbul test node_modules/mocha/bin/_mocha -- --reporter spec"
   },
   "repository": {
     "type": "git",
