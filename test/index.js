@@ -255,6 +255,80 @@ describe('decoding uint[2] with [1,2,3]', function () {
   })
 })
 
+describe('stringify', function () {
+  it('should be hex prefixed for address', function () {
+    assert.deepEqual(abi.stringify([ 'address' ], [ new BN('1234', 16) ]), [ '0x1234' ])
+  })
+
+  it('should be hex prefixed for bytes', function () {
+    assert.deepEqual(abi.stringify([ 'bytes' ], [ new Buffer('1234', 'hex') ]), [ '0x1234' ])
+  })
+
+  it('should be hex prefixed for bytesN', function () {
+    assert.deepEqual(abi.stringify([ 'bytes32' ], [ new Buffer('1234', 'hex') ]), [ '0x1234' ])
+  })
+
+  it('should be a number for uint', function () {
+    assert.deepEqual(abi.stringify([ 'uint' ], [ 42 ]), [ '42' ])
+  })
+
+  it('should be a number for uintN', function () {
+    assert.deepEqual(abi.stringify([ 'uint8' ], [ 42 ]), [ '42' ])
+  })
+
+  it('should be a number for int', function () {
+    assert.deepEqual(abi.stringify([ 'int' ], [ -42 ]), [ '-42' ])
+  })
+
+  it('should be a number for intN', function () {
+    assert.deepEqual(abi.stringify([ 'int8' ], [ -42 ]), [ '-42' ])
+  })
+
+  it('should work for bool (true)', function () {
+    assert.deepEqual(abi.stringify([ 'bool' ], [ true ]), [ 'true' ])
+  })
+
+  it('should work for bool (false)', function () {
+    assert.deepEqual(abi.stringify([ 'bool' ], [ false ]), [ 'false' ])
+  })
+
+  it('should work for address[]', function () {
+    assert.deepEqual(abi.stringify([ 'address[]' ], [ [ new BN('1234', 16), new BN('5678', 16) ] ]), [ '0x1234, 0x5678' ])
+  })
+
+  it('should work for address[2]', function () {
+    assert.deepEqual(abi.stringify([ 'address[2]' ], [ [ new BN('1234', 16), new BN('5678', 16) ] ]), [ '0x1234, 0x5678' ])
+  })
+
+  it('should work for bytes[]', function () {
+    assert.deepEqual(abi.stringify([ 'bytes[]' ], [ [ new Buffer('1234', 'hex'), new Buffer('5678', 'hex') ] ]), [ '0x1234, 0x5678' ])
+  })
+
+  it('should work for bytes[2]', function () {
+    assert.deepEqual(abi.stringify([ 'bytes[2]' ], [ [ new Buffer('1234', 'hex'), new Buffer('5678', 'hex') ] ]), [ '0x1234, 0x5678' ])
+  })
+
+  it('should work for uint[]', function () {
+    assert.deepEqual(abi.stringify([ 'uint[]' ], [ [ 1, 2, 3 ] ]), [ '1, 2, 3' ])
+  })
+
+  it('should work for uint[3]', function () {
+    assert.deepEqual(abi.stringify([ 'uint[3]' ], [ [ 1, 2, 3 ] ]), [ '1, 2, 3' ])
+  })
+
+  it('should work for int[]', function () {
+    assert.deepEqual(abi.stringify([ 'int[]' ], [ [ -1, -2, -3 ] ]), [ '-1, -2, -3' ])
+  })
+
+  it('should work for int[3]', function () {
+    assert.deepEqual(abi.stringify([ 'int[3]' ], [ [ -1, -2, -3 ] ]), [ '-1, -2, -3' ])
+  })
+
+  it('should work for multiple entries', function () {
+    assert.deepEqual(abi.stringify([ 'bool', 'bool' ], [ true, true ]), [ 'true', 'true' ])
+  })
+})
+
 // Tests for Solidity's tight packing
 describe('solidity tight packing bool', function () {
   it('should equal', function () {
