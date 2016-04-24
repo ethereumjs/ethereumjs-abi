@@ -40,6 +40,36 @@ describe('official test vector 4 (encoding)', function () {
 
 // Homebrew tests
 
+describe('method signature', function () {
+  it('should work with test()', function () {
+    assert.equal(abi.methodID('test', []).toString('hex'), 'f8a8fd6d')
+  })
+  it('should work with test(uint)', function () {
+    assert.equal(abi.methodID('test', [ 'uint' ]).toString('hex'), '29e99f07')
+  })
+  it('should work with test(uint256)', function () {
+    assert.equal(abi.methodID('test', [ 'uint256' ]).toString('hex'), '29e99f07')
+  })
+  it('should work with test(uint, uint)', function () {
+    assert.equal(abi.methodID('test', [ 'uint', 'uint' ]).toString('hex'), 'eb8ac921')
+  })
+})
+
+describe('event signature', function () {
+  it('should work with test()', function () {
+    assert.equal(abi.eventID('test', []).toString('hex'), 'f8a8fd6dd9544ca87214e80c840685bd13ff4682cacb0c90821ed74b1d248926')
+  })
+  it('should work with test(uint)', function () {
+    assert.equal(abi.eventID('test', [ 'uint' ]).toString('hex'), '29e99f07d14aa8d30a12fa0b0789b43183ba1bf6b4a72b95459a3e397cca10d7')
+  })
+  it('should work with test(uint256)', function () {
+    assert.equal(abi.eventID('test', [ 'uint256' ]).toString('hex'), '29e99f07d14aa8d30a12fa0b0789b43183ba1bf6b4a72b95459a3e397cca10d7')
+  })
+  it('should work with test(uint, uint)', function () {
+    assert.equal(abi.eventID('test', [ 'uint', 'uint' ]).toString('hex'), 'eb8ac9210327650aab0044de896b150391af3be06f43d0f74c01f05633b97a70')
+  })
+})
+
 describe('encoding negative int32', function () {
   it('should equal', function () {
     var a = abi.rawEncode('neg', [ 'int32' ], [ -2 ]).toString('hex')
