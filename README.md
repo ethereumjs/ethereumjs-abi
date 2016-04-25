@@ -13,21 +13,21 @@ Module implementing the [Ethereum ABI](https://github.com/ethereum/wiki/wiki/Eth
 
 #### Manual encoding and decoding
 
-There are two methods of interest, ```rawEncode``` to encode a call (name plus arguments) and ```rawDecode``` to decode a response for a specific encoded query.
+There are three methods of interest:
+- ```methodID``` to create a function signature
+- ```rawEncode``` to encode fields and
+- ```rawDecode``` to decode fields
 
 Example code:
 ```js
 var abi = require('ethereumjs-abi')
 
 // returns the encoded binary (as a Buffer) data to be sent
-var encoded = abi.rawEncode("balanceOf", [ "address" ], [ "0x0000000000000000000000000000000000000000" ])
+var encoded = abi.rawEncode([ "address" ], [ "0x0000000000000000000000000000000000000000" ])
 
 // returns the decoded array of arguments
-// need to define the input argument list in order to select the proper function
-var decoded = abi.rawDecode("balanceOf", [ "address" ], [ "uint256" ], data)
+var decoded = abi.rawDecode([ "address" ], data)
 ```
-
-For preparing encoded blocks without the signature, use ```rawEncodeResponse```. This can be useful when interfacing with contracts as a data provider.
 
 #### Encoding and decoding aided by the JSON ABI definition
 
