@@ -44,6 +44,18 @@ var encoded = abi.encode(tokenAbi, "balanceOf(uint256 address)", [ "0x0000000000
 var decoded = abi.decode(tokenAbi, "balanceOf(uint256 address)", data)
 ```
 
+#### Simple encoding and decoding
+
+```js
+var abi = require('ethereumjs-abi')
+
+// returns the encoded binary (as a Buffer) data to be sent
+var encoded = abi.simpleEncode("balanceOf(address):(uint256)", "0x0000000000000000000000000000000000000000")
+
+// returns the decoded array of arguments
+var decoded = abi.simpleDecode("balanceOf(address):(uint256)", data)
+```
+
 #### Solidity *tightly packed* formats
 
 This library also supports creating Solidity's tightly packed data constructs, which are used together with ```sha3```, ```sha256``` and ```ripemd160``` to create hashes.
