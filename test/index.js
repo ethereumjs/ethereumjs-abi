@@ -6,7 +6,7 @@ var BN = require('bn.js')
 
 describe('official test vector 1 (encoding)', function () {
   it('should equal', function () {
-    var a = abi.rawEncode('baz', [ 'uint32', 'bool' ], [ 69, 1 ]).toString('hex')
+    var a = abi.methodID('baz', [ 'uint32', 'bool' ]).toString('hex') + abi.rawEncode([ 'uint32', 'bool' ], [ 69, 1 ]).toString('hex')
     var b = 'cdcd77c000000000000000000000000000000000000000000000000000000000000000450000000000000000000000000000000000000000000000000000000000000001'
     assert.equal(a, b)
   })
@@ -15,7 +15,7 @@ describe('official test vector 1 (encoding)', function () {
 /*
 describe('official test vector 2 (encoding)', function () {
   it('should equal', function () {
-    var a = abi.rawEncode('bar', [ 'real128x128[2]' ], [ [ 2.125, 8.5 ] ]).toString('hex')
+    var a = abi.methodID('bar', [ 'real128x128[2]' ]).toString('hex') + abi.rawEncode([ 'real128x128[2]' ], [ [ 2.125, 8.5 ] ]).toString('hex')
     var b = '3e27986000000000000000000000000000000002400000000000000000000000000000000000000000000000000000000000000880000000000000000000000000000000'
     assert.equal(a, b)
   })
@@ -24,7 +24,7 @@ describe('official test vector 2 (encoding)', function () {
 
 describe('official test vector 3 (encoding)', function () {
   it('should equal', function () {
-    var a = abi.rawEncode('sam', [ 'bytes', 'bool', 'uint256[]' ], [ 'dave', true, [ 1, 2, 3 ] ]).toString('hex')
+    var a = abi.methodID('sam', [ 'bytes', 'bool', 'uint256[]' ]).toString('hex') + abi.rawEncode([ 'bytes', 'bool', 'uint256[]' ], [ 'dave', true, [ 1, 2, 3 ] ]).toString('hex')
     var b = 'a5643bf20000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000000464617665000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003'
     assert.equal(a, b)
   })
@@ -32,7 +32,7 @@ describe('official test vector 3 (encoding)', function () {
 
 describe('official test vector 4 (encoding)', function () {
   it('should equal', function () {
-    var a = abi.rawEncode('f', [ 'uint', 'uint32[]', 'bytes10', 'bytes' ], [ 0x123, [ 0x456, 0x789 ], '1234567890', 'Hello, world!' ]).toString('hex')
+    var a = abi.methodID('f', [ 'uint', 'uint32[]', 'bytes10', 'bytes' ]).toString('hex') + abi.rawEncode([ 'uint', 'uint32[]', 'bytes10', 'bytes' ], [ 0x123, [ 0x456, 0x789 ], '1234567890', 'Hello, world!' ]).toString('hex')
     var b = '8be6524600000000000000000000000000000000000000000000000000000000000001230000000000000000000000000000000000000000000000000000000000000080313233343536373839300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000004560000000000000000000000000000000000000000000000000000000000000789000000000000000000000000000000000000000000000000000000000000000d48656c6c6f2c20776f726c642100000000000000000000000000000000000000'
     assert.equal(a, b)
   })
@@ -72,31 +72,31 @@ describe('event signature', function () {
 
 describe('encoding negative int32', function () {
   it('should equal', function () {
-    var a = abi.rawEncode('neg', [ 'int32' ], [ -2 ]).toString('hex')
-    var b = 'ae4f88b1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe'
+    var a = abi.rawEncode([ 'int32' ], [ -2 ]).toString('hex')
+    var b = 'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe'
     assert.equal(a, b)
   })
 })
 
 describe('encoding negative int256', function () {
   it('should equal', function () {
-    var a = abi.rawEncode('neg', [ 'int256' ], [ new BN('-19999999999999999999999999999999999999999999999999999999999999', 10) ]).toString('hex')
-    var b = '54a53dc1fffffffffffff38dd0f10627f5529bdb2c52d4846810af0ac000000000000001'
+    var a = abi.rawEncode([ 'int256' ], [ new BN('-19999999999999999999999999999999999999999999999999999999999999', 10) ]).toString('hex')
+    var b = 'fffffffffffff38dd0f10627f5529bdb2c52d4846810af0ac000000000000001'
     assert.equal(a, b)
   })
 })
 
 describe('encoding string >32bytes', function () {
   it('should equal', function () {
-    var a = abi.rawEncode('test', [ 'string' ], [ ' hello world hello world hello world hello world  hello world hello world hello world hello world  hello world hello world hello world hello world hello world hello world hello world hello world' ]).toString('hex')
-    var b = 'f9fbd554000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000c22068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c64202068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c64202068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c64000000000000000000000000000000000000000000000000000000000000'
+    var a = abi.rawEncode([ 'string' ], [ ' hello world hello world hello world hello world  hello world hello world hello world hello world  hello world hello world hello world hello world hello world hello world hello world hello world' ]).toString('hex')
+    var b = '000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000c22068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c64202068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c64202068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c642068656c6c6f20776f726c64000000000000000000000000000000000000000000000000000000000000'
     assert.equal(a, b)
   })
 })
 
 describe('encoding uint32 response', function () {
   it('should equal', function () {
-    var a = abi.rawEncodeResponse([ 'uint32' ], [ 42 ]).toString('hex')
+    var a = abi.rawEncode([ 'uint32' ], [ 42 ]).toString('hex')
     var b = '000000000000000000000000000000000000000000000000000000000000002a'
     assert.equal(a, b)
   })
@@ -104,7 +104,7 @@ describe('encoding uint32 response', function () {
 
 describe('encoding string response (unsupported)', function () {
   it('should equal', function () {
-    var a = abi.rawEncodeResponse([ 'string' ], [ 'a response string (unsupported)' ]).toString('hex')
+    var a = abi.rawEncode([ 'string' ], [ 'a response string (unsupported)' ]).toString('hex')
     var b = '0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001f6120726573706f6e736520737472696e672028756e737570706f727465642900'
     assert.equal(a, b)
   })
@@ -112,18 +112,18 @@ describe('encoding string response (unsupported)', function () {
 
 describe('encoding', function () {
   it('should work for uint256', function () {
-    var a = abi.rawEncode('foo', [ 'uint256' ], [ 1 ]).toString('hex')
-    var b = '2fbebd380000000000000000000000000000000000000000000000000000000000000001'
+    var a = abi.rawEncode([ 'uint256' ], [ 1 ]).toString('hex')
+    var b = '0000000000000000000000000000000000000000000000000000000000000001'
     assert.equal(a, b)
   })
   it('should work for uint', function () {
-    var a = abi.rawEncode('foo', [ 'uint' ], [ 1 ]).toString('hex')
-    var b = '2fbebd380000000000000000000000000000000000000000000000000000000000000001'
+    var a = abi.rawEncode([ 'uint' ], [ 1 ]).toString('hex')
+    var b = '0000000000000000000000000000000000000000000000000000000000000001'
     assert.equal(a, b)
   })
   it('should work for int256', function () {
-    var a = abi.rawEncode('foo', [ 'int256' ], [ -1 ]).toString('hex')
-    var b = '4c970b2fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+    var a = abi.rawEncode([ 'int256' ], [ -1 ]).toString('hex')
+    var b = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
     assert.equal(a, b)
   })
 })
@@ -155,7 +155,7 @@ describe('encoding uint257', function () {
 describe('encoding int0', function () {
   it('should fail', function () {
     assert.throws(function () {
-      abi.rawEncode('fail', [ 'int0' ], [ 1 ])
+      abi.rawEncode([ 'int0' ], [ 1 ])
     }, Error)
   })
 })
@@ -163,7 +163,7 @@ describe('encoding int0', function () {
 describe('encoding int257', function () {
   it('should fail', function () {
     assert.throws(function () {
-      abi.rawEncode('fail', [ 'int257' ], [ 1 ])
+      abi.rawEncode([ 'int257' ], [ 1 ])
     }, Error)
   })
 })
@@ -171,7 +171,7 @@ describe('encoding int257', function () {
 describe('encoding uint[2] with [1,2,3]', function () {
   it('should fail', function () {
     assert.throws(function () {
-      abi.rawEncode('fail', [ 'uint[2]' ], [ [ 1, 2, 3 ] ])
+      abi.rawEncode([ 'uint[2]' ], [ [ 1, 2, 3 ] ])
     }, Error)
   })
 })
@@ -179,7 +179,7 @@ describe('encoding uint[2] with [1,2,3]', function () {
 describe('encoding uint8 with 9bit data', function () {
   it('should fail', function () {
     assert.throws(function () {
-      abi.rawEncode('fail', [ 'uint8' ], [ new BN(1).iushln(9) ])
+      abi.rawEncode([ 'uint8' ], [ new BN(1).iushln(9) ])
     }, Error)
   })
 })
@@ -188,7 +188,7 @@ describe('encoding uint8 with 9bit data', function () {
 
 describe('decoding uint32', function () {
   it('should equal', function () {
-    var a = abi.rawDecode(null, null, [ 'uint32' ], new Buffer('000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
+    var a = abi.rawDecode([ 'uint32' ], new Buffer('000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
     var b = new BN(42)
     assert.equal(a.length, 1)
     assert.equal(a[0].toString(), b.toString())
@@ -197,7 +197,7 @@ describe('decoding uint32', function () {
 
 describe('decoding uint256[]', function () {
   it('should equal', function () {
-    var a = abi.rawDecode(null, null, [ 'uint256[]' ], new Buffer('00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003', 'hex'))
+    var a = abi.rawDecode([ 'uint256[]' ], new Buffer('00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003', 'hex'))
     var b = new BN(1)
     var c = new BN(2)
     var d = new BN(3)
@@ -212,7 +212,7 @@ describe('decoding uint256[]', function () {
 
 describe('decoding bytes', function () {
   it('should equal', function () {
-    var a = abi.rawDecode(null, null, [ 'bytes' ], new Buffer('0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000b68656c6c6f20776f726c64000000000000000000000000000000000000000000', 'hex'))
+    var a = abi.rawDecode([ 'bytes' ], new Buffer('0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000b68656c6c6f20776f726c64000000000000000000000000000000000000000000', 'hex'))
     var b = new Buffer('68656c6c6f20776f726c64', 'hex')
 
     assert.equal(a.length, 1)
@@ -222,7 +222,7 @@ describe('decoding bytes', function () {
 
 describe('decoding string', function () {
   it('should equal', function () {
-    var a = abi.rawDecode(null, null, [ 'string' ], new Buffer('0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000b68656c6c6f20776f726c64000000000000000000000000000000000000000000', 'hex'))
+    var a = abi.rawDecode([ 'string' ], new Buffer('0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000b68656c6c6f20776f726c64000000000000000000000000000000000000000000', 'hex'))
     var b = 'hello world'
     assert.equal(a.length, 1)
     assert.equal(a[0], b)
@@ -231,26 +231,26 @@ describe('decoding string', function () {
 
 describe('decoding int32', function () {
   it('should equal', function () {
-    var a = abi.rawDecode(null, null, [ 'int32' ], new Buffer('fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe', 'hex'))
+    var a = abi.rawDecode([ 'int32' ], new Buffer('fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe', 'hex'))
     var b = new BN(-2)
     assert.equal(a.length, 1)
     assert.equal(a[0].toString(), b.toString())
 
-    a = abi.rawDecode(null, null, [ 'int64' ], new Buffer('ffffffffffffffffffffffffffffffffffffffffffffffffffffb29c26f344fe', 'hex'))
+    a = abi.rawDecode([ 'int64' ], new Buffer('ffffffffffffffffffffffffffffffffffffffffffffffffffffb29c26f344fe', 'hex'))
     b = new BN(-85091238591234)
     assert.equal(a.length, 1)
     assert.equal(a[0].toString(), b.toString())
   })
   it('should fail', function () {
     assert.throws(function () {
-      abi.rawDecode(null, null, [ 'int32' ], new Buffer('ffffffffffffffffffffffffffffffffffffffffffffffffffffb29c26f344fe', 'hex'))
+      abi.rawDecode([ 'int32' ], new Buffer('ffffffffffffffffffffffffffffffffffffffffffffffffffffb29c26f344fe', 'hex'))
     }, Error)
   })
 })
 
 describe('decoding bool, uint32', function () {
   it('should equal', function () {
-    var a = abi.rawDecode(null, null, [ 'bool', 'uint32' ], new Buffer('0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
+    var a = abi.rawDecode([ 'bool', 'uint32' ], new Buffer('0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
     assert.equal(a.length, 2)
     assert.equal(a[0], true)
     assert.equal(a[1].toString(), new BN(42).toString())
@@ -259,7 +259,7 @@ describe('decoding bool, uint32', function () {
 
 describe('decoding bool, uint256[]', function () {
   it('should equal', function () {
-    var a = abi.rawDecode(null, null, [ 'bool', 'uint256[]' ], new Buffer('000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
+    var a = abi.rawDecode([ 'bool', 'uint256[]' ], new Buffer('000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
     assert.equal(a.length, 2)
     assert.equal(a[0], true)
     assert.equal(a[1].length, 1)
@@ -269,7 +269,7 @@ describe('decoding bool, uint256[]', function () {
 
 describe('decoding uint256[], bool', function () {
   it('should equal', function () {
-    var a = abi.rawDecode(null, null, [ 'uint256[]', 'bool' ], new Buffer('000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
+    var a = abi.rawDecode([ 'uint256[]', 'bool' ], new Buffer('000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
     assert.equal(a.length, 2)
     assert.equal(a[1], true)
     assert.equal(a[0].length, 1)
@@ -281,7 +281,7 @@ describe('decoding uint256[], bool', function () {
 describe('decoding uint[2] with [1,2,3]', function () {
   it('should fail', function () {
     assert.throws(function () {
-      abi.rawDecode(null, null, [ 'uint[2]' ], new Buffer('00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003', 'hex'))
+      abi.rawDecode([ 'uint[2]' ], new Buffer('00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003', 'hex'))
     }, Error)
   })
 })
