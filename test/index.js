@@ -280,12 +280,11 @@ describe('decoding uint256[], bool', function () {
 describe('decoding fixed-array', function () {
   it('uint[3]', function () {
     var a = abi.rawDecode([ 'uint[3]' ], new Buffer('000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003', 'hex'))
-    console.log(a);
-    assert.equal(a.length, 1);
-    assert.equal(a[0].length, 3);
-    assert.equal(a[0][0].toString(10), 1);
-    assert.equal(a[0][1].toString(10), 2);
-    assert.equal(a[0][2].toString(10), 3);
+    assert.equal(a.length, 1)
+    assert.equal(a[0].length, 3)
+    assert.equal(a[0][0].toString(10), 1)
+    assert.equal(a[0][1].toString(10), 2)
+    assert.equal(a[0][2].toString(10), 3)
   })
 })
 
