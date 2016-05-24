@@ -525,7 +525,7 @@ describe('solidity tight packing with small ints', function () {
 
 describe('converting from serpent types', function () {
   it('should equal', function () {
-    assert.deepEqual(abi.fromSerpent('s'), [ 'bytes' ])
+    assert.deepEqual(abi.fromSerpent('s'), [ 'string' ])
     assert.deepEqual(abi.fromSerpent('b'), [ 'bytes' ])
     assert.deepEqual(abi.fromSerpent('i'), [ 'int256' ])
     assert.deepEqual(abi.fromSerpent('a'), [ 'int256[]' ])
@@ -533,7 +533,7 @@ describe('converting from serpent types', function () {
     assert.deepEqual(abi.fromSerpent('b8i'), [ 'bytes8', 'int256' ])
     assert.deepEqual(abi.fromSerpent('b32'), [ 'bytes32' ])
     assert.deepEqual(abi.fromSerpent('b32i'), [ 'bytes32', 'int256' ])
-    assert.deepEqual(abi.fromSerpent('sbb8ib8a'), [ 'bytes', 'bytes', 'bytes8', 'int256', 'bytes8', 'int256[]' ])
+    assert.deepEqual(abi.fromSerpent('sbb8ib8a'), [ 'string', 'bytes', 'bytes8', 'int256', 'bytes8', 'int256[]' ])
     assert.throws(function () {
       abi.fromSerpent('i8')
     })
