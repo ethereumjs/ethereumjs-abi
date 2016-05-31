@@ -5,8 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "bn.js": "^4.10.0",
-    "ethereumjs-util": "^4.3.0",
-    "utf8": "2.1.1"
+    "ethereumjs-util": "^4.3.0"
   },
   "devDependencies": {
     "browserify": "12.0.1",

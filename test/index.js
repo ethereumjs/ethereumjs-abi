@@ -560,3 +560,26 @@ describe('converting to serpent types', function () {
     })
   })
 })
+
+describe('utf8 handling', function () {
+  it('should encode latin and extensions', function () {
+    var a = abi.rawEncode([ 'string' ], [ 'ethereum számítógép' ]).toString('hex')
+    var b = '00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000017657468657265756d20737ac3a16dc3ad74c3b367c3a970000000000000000000'
+    assert.equal(a, b)
+  })
+  it('should encode non-latin characters', function () {
+    var a = abi.rawEncode([ 'string' ], [ '为什么那么认真？']).toString('hex')
+    var b = '00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000018e4b8bae4bb80e4b988e982a3e4b988e8aea4e79c9fefbc9f0000000000000000'
+    assert.equal(a, b)
+  })
+  it('should decode latin and extensions', function () {
+    var a = 'ethereum számítógép'
+    var b = abi.rawDecode([ 'string' ], new Buffer('00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000017657468657265756d20737ac3a16dc3ad74c3b367c3a970000000000000000000', 'hex'))
+    assert.equal(a, b[0])
+  })
+  it('should decode non-latin characters', function () {
+    var a = '为什么那么认真？'
+    var b = abi.rawDecode([ 'string' ], new Buffer('00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000018e4b8bae4bb80e4b988e982a3e4b988e8aea4e79c9fefbc9f0000000000000000', 'hex'))
+    assert.equal(a, b[0])
+  })
+})
