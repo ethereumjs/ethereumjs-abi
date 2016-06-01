@@ -568,7 +568,7 @@ describe('utf8 handling', function () {
     assert.equal(a, b)
   })
   it('should encode non-latin characters', function () {
-    var a = abi.rawEncode([ 'string' ], [ '为什么那么认真？']).toString('hex')
+    var a = abi.rawEncode([ 'string' ], [ '为什么那么认真？' ]).toString('hex')
     var b = '00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000018e4b8bae4bb80e4b988e982a3e4b988e8aea4e79c9fefbc9f0000000000000000'
     assert.equal(a, b)
   })
