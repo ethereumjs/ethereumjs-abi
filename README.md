@@ -102,17 +102,15 @@ We provide two helpers to convert between these notations:
 
 Example usage:
 ```js
-abi.fromSerpent('s')    // [ 'string' ]
-abi.fromSerpent('b')    // [ 'bytes' ]
+abi.fromSerpent('s')    // [ 'bytes' ]
 abi.fromSerpent('i')    // [ 'int256' ]
 abi.fromSerpent('a')    // [ 'int256[]' ]
 abi.fromSerpent('b8')   // [ 'bytes8' ]
 abi.fromSerpent('b8i')  // [ 'bytes8', 'int256' ]
 
-abi.toSerpent([ 'string' ])            // 's'
+abi.toSerpent([ 'bytes' ])             // 's'
 abi.toSerpent([ 'int256' ])            // 'i'
 abi.toSerpent([ 'int256[]' ])          // 'a'
-abi.toSerpent([ 'bytes' ])             // 'b'
 abi.toSerpent([ 'bytes8' ])            // 'b8'
 abi.toSerpent([ 'bytes8', 'int256' ])  // 'b8i'
 ```
@@ -124,6 +122,8 @@ var encoded = abi.rawEncode("balanceOf", abi.fromSerpent("i"), [ "0x000000000000
 
 var decoded = abi.rawDecode("balanceOf", abi.fromSerpent("i"), abi.fromSerpent("i"), data)
 ```
+
+Note: Serpent uses arbitary binary fields. If you want to store strings it is preferable to ensure it is stored as UTF8. `new Buffer(<string>, 'utf8')` can be used to ensure it is properly encoded.
 
 ## Contributing
 
