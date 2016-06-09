@@ -8,7 +8,6 @@
     "ethereumjs-util": "^4.3.0"
   },
   "devDependencies": {
-    "browserify": "12.0.1",
     "coveralls": "^2.11.4",
     "istanbul": "^0.4.1",
     "mocha": "^2.1.0",
@@ -19,7 +18,6 @@
     "coveralls": "npm run coverage && coveralls <coverage/lcov.info",
     "lint": "standard",
     "prepublish": "npm run lint && npm run test",
-    "build": "browserify index.js -s EthAbi -o ethereumjs-abi.js",
     "test": "istanbul test _mocha -- --reporter spec"
   },
   "repository": {
