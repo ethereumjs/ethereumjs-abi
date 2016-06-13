@@ -604,6 +604,12 @@ describe('decoding ufixed128x128', function () {
     var b = abi.rawDecode([ 'ufixed128x128' ], a)
     assert.equal(b[0].toNumber(), 1)
   })
+  it('decimals should fail', function () {
+    var a = new Buffer('0000000000000000000000000000000100000000000000000000000000000001', 'hex')
+    assert.throws(function () {
+      abi.rawDecode([ 'ufixed128x128' ], a)
+    }, /^Error: Decimals not supported yet/)
+  })
 })
 
 describe('decoding fixed128x128', function () {
@@ -611,5 +617,11 @@ describe('decoding fixed128x128', function () {
     var a = new Buffer('ffffffffffffffffffffffffffffffff00000000000000000000000000000000', 'hex')
     var b = abi.rawDecode([ 'fixed128x128' ], a)
     assert.equal(b[0].toNumber(), -1)
+  })
+  it('decimals should fail', function () {
+    var a = new Buffer('ffffffffffffffffffffffffffffffff00000000000000000000000000000001', 'hex')
+    assert.throws(function () {
+      abi.rawDecode([ 'fixed128x128' ], a)
+    }, /^Error: Decimals not supported yet/)
   })
 })
