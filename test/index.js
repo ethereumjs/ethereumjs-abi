@@ -633,3 +633,10 @@ describe('encoding -1 as uint', function () {
     }, /^Error: Supplied uint is negative/)
   })
 })
+
+describe('encoding 256 bits as bytes', function () {
+  it('should not leave trailing zeroes', function () {
+    var a = abi.rawEncode([ 'bytes' ], [ new Buffer('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex') ])
+    assert.equal(a.toString('hex'), '00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000020ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+  })
+})
