@@ -625,3 +625,11 @@ describe('decoding fixed128x128', function () {
     }, /^Error: Decimals not supported yet/)
   })
 })
+
+describe('encoding -1 as uint', function () {
+  it('should throw', function () {
+    assert.throws(function () {
+      abi.rawEncode([ 'uint' ], [ -1 ])
+    }, /^Error: Supplied uint is negative/)
+  })
+})
