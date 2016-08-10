@@ -633,3 +633,11 @@ describe('encoding -1 as uint', function () {
     }, /^Error: Supplied uint is negative/)
   })
 })
+
+describe('encoding 0-length fixed array (e.g. int[0])', function () {
+  it('should throw', function () {
+    assert.throws(function () {
+      abi.rawEncode([ 'uint[0]' ], [ [] ])
+    }, /^Error: 0-length fixed array is invalid/)
+  })
+})
