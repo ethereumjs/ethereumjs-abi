@@ -288,6 +288,17 @@ describe('decoding fixed-array', function () {
   })
 })
 
+describe('decoding (uint[2], uint)', function () {
+  it('should work', function () {
+    var a = abi.rawDecode([ 'uint[2]', 'uint' ], new Buffer('0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000005c0000000000000000000000000000000000000000000000000000000000000003', 'hex'))
+    assert.equal(a.length, 2)
+    assert.equal(a[0].length, 2)
+    assert.equal(a[0][0].toString(10), 1)
+    assert.equal(a[0][1].toString(10), 92)
+    assert.equal(a[1].toString(10), 3)
+  })
+})
+
 /* FIXME: should check that the whole input buffer was consumed
 describe('decoding uint[2] with [1,2,3]', function () {
   it('should fail', function () {
