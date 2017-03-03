@@ -126,6 +126,11 @@ describe('encoding', function () {
     var b = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
     assert.equal(a, b)
   })
+  it('should work for address', function () {
+    var a = abi.rawEncode([ 'address' ], [ '0xce85ce682f7193991c9460403007a29badca198d' ]).toString('hex')
+    var b = '000000000000000000000000ce85ce682f7193991c9460403007a29badca198d'
+    assert.equal(a, b)
+  })
 })
 
 describe('encoding bytes33', function () {
@@ -226,6 +231,14 @@ describe('decoding string', function () {
     var b = 'hello world'
     assert.equal(a.length, 1)
     assert.equal(a[0], b)
+  })
+})
+
+describe('decoding address', function () {
+  it('should equal', function () {
+    var a = abi.rawDecode([ 'address' ], new Buffer('000000000000000000000000ce85ce682f7193991c9460403007a29badca198d', 'hex'))
+    var b = '0xce85ce682f7193991c9460403007a29badca198d'
+    assert.equal(a, b)
   })
 })
 
