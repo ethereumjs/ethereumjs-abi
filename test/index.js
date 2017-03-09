@@ -490,6 +490,17 @@ describe('solidity tight packing int16', function () {
   })
 })
 
+describe('solidity tight packing multiple arguments', function () {
+  it('should equal', function () {
+    var a = abi.solidityPack(
+      [ 'bytes32', 'uint32', 'uint32', 'uint32', 'uint32' ],
+      [ new Buffer('123456', 'hex'), 6, 7, 8, 9 ]
+    )
+    var b = '123456000000000000000000000000000000000000000000000000000000000000000006000000070000000800000009'
+    assert.equal(a.toString('hex'), b.toString('hex'))
+  })
+})
+
 describe('solidity tight packing sha3', function () {
   it('should equal', function () {
     var a = abi.soliditySHA3(
@@ -497,6 +508,17 @@ describe('solidity tight packing sha3', function () {
       [ new BN('43989fb883ba8111221e89123897538475893837', 16), 0, 10000, 1448075779 ]
     )
     var b = 'c3ab5ca31a013757f26a88561f0ff5057a97dfcc33f43d6b479abc3ac2d1d595'
+    assert.equal(a.toString('hex'), b.toString('hex'))
+  })
+})
+
+describe('solidity tight packing sha3 #2', function () {
+  it('should equal', function () {
+    var a = abi.soliditySHA3(
+      [ 'bytes32', 'uint32', 'uint32', 'uint32', 'uint32' ],
+      [ new Buffer('123456', 'hex'), 6, 7, 8, 9 ]
+    )
+    var b = '1f2eedb6c2ac3e4b4e4c9f7598e626baf1e15a4e848d295479f46ec85d967cba'
     assert.equal(a.toString('hex'), b.toString('hex'))
   })
 })
