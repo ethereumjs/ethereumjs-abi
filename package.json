@@ -32,9 +32,9 @@
   "author": "Alex Beregszaszi <alex@rtfs.hu>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/expansejs/ethereumjs-abi/issues"
+    "url": "https://github.com/expansejs/expansejs-abi/issues"
   },
-  "homepage": "https://github.com/expansejs/ethereumjs-abi",
+  "homepage": "https://github.com/expansejs/expansejs-abi",
   "standard": {
     "globals": [
       "describe",
