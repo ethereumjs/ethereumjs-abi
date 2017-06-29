@@ -126,6 +126,10 @@ Note: Serpent uses arbitary binary fields. If you want to store strings it is pr
 ## Contributing
 
 I am more than happy to receive improvements. Please send me a pull request or reach out on email or twitter.
+#expansejs-abi
+[![NPM Package](https://img.shields.io/npm/v/expansejs-abi.svg?style=flat-square)](https://www.npmjs.org/package/expansejs-abi)
+[![Build Status](https://img.shields.io/travis/expansejs/expansejs-abi.svg?branch=master&style=flat-square)](https://travis-ci.org/expansejs/expansejs-abi)
+[![Coverage Status](https://img.shields.io/coveralls/expansejs/expansejs-abi.svg?style=flat-square)](https://coveralls.io/r/expansejs/expansejs-abi)
 
 There is a lot missing, grep for *FIXME* in the source code to find inspiration.
 
