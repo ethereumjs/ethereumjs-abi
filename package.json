@@ -1,11 +1,11 @@
 {
-  "name": "ethereumjs-abi",
+  "name": "expansejs-abi",
   "version": "0.6.4",
-  "description": "Decoder and encoder for the Ethereum ABI",
+  "description": "Decoder and encoder for the Expanse ABI",
   "main": "index.js",
   "dependencies": {
     "bn.js": "^4.10.0",
-    "ethereumjs-util": "^4.3.0"
+    "expansejs-util": "5.1.2"
   },
   "devDependencies": {
     "coveralls": "^2.11.4",
@@ -22,18 +22,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/axic/ethereumjs-abi.git"
+    "url": "git+https://github.com/expansejs/expansejs-abi.git"
   },
   "keywords": [
     "ethereum",
+    "expanse",
     "ABI"
   ],
   "author": "Alex Beregszaszi <alex@rtfs.hu>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/axic/ethereumjs-abi/issues"
+    "url": "https://github.com/expansejs/expansejs-abi/issues"
   },
-  "homepage": "https://github.com/axic/ethereumjs-abi",
+  "homepage": "https://github.com/expansejs/expansejs-abi",
   "standard": {
     "globals": [
       "describe",
