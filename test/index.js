@@ -501,6 +501,31 @@ describe('solidity tight packing multiple arguments', function () {
   })
 })
 
+describe('solidity tight packing arrays', function () {
+  it('should equal', function () {
+    var a = abi.solidityPack(
+      [ 'uint32[]' ],
+      [ [ 8, 9 ] ]
+    )
+    var b = '00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000009'
+    assert.equal(a.toString('hex'), b.toString('hex'))
+
+    a = abi.solidityPack(
+      [ 'bool[][]' ],
+      [ [[true, false], [false, true]] ]
+    )
+    b = '0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001'
+    assert.equal(a.toString('hex'), b.toString('hex'))
+
+    a = abi.solidityPack(
+      [ 'address[]' ],
+      [ [new BN('43989fb883ba8111221e89123897538475893837', 16)] ]
+    )
+    b = '00000000000000000000000043989fb883ba8111221e89123897538475893837'
+    assert.equal(a.toString('hex'), b.toString('hex'))
+  })
+})
+
 describe('solidity tight packing sha3', function () {
   it('should equal', function () {
     var a = abi.soliditySHA3(
