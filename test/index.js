@@ -184,6 +184,11 @@ describe('encoding uint8 with 9bit data', function () {
   })
 })
 
+it('decoding address with leading 0', function () {
+  var decoded = abi.rawDecode([ 'address' ], new Buffer('0000000000000000000000000005b7d915458ef540ade6068dfe2f44e8fa733c', 'hex'))
+  assert.deepEqual(abi.stringify([ 'address' ], decoded), [ '0x0005b7d915458ef540ade6068dfe2f44e8fa733c' ])
+})
+
 // Homebrew decoding tests
 
 describe('decoding uint32', function () {
