@@ -118,9 +118,9 @@ abi.toSerpent([ 'bytes8', 'int256' ])  // 'b8i'
 It is to be used in conjunction with ```rawEncode``` and ```rawDecode```:
 
 ```js
-var encoded = abi.rawEncode("balanceOf", abi.fromSerpent("i"), [ "0x0000000000000000000000000000000000000000" ])
+var encoded = abi.rawEncode(abi.fromSerpent("i"), [ "0x0000000000000000000000000000000000000000" ])
 
-var decoded = abi.rawDecode("balanceOf", abi.fromSerpent("i"), abi.fromSerpent("i"), data)
+var decoded = abi.rawDecode([...abi.fromSerpent("i"), ...abi.fromSerpent("i")], data)
 ```
 
 Note: Serpent uses arbitary binary fields. If you want to store strings it is preferable to ensure it is stored as UTF8. `new Buffer(<string>, 'utf8')` can be used to ensure it is properly encoded.
