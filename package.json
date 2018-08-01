@@ -1,6 +1,6 @@
 {
-  "name": "ethereumjs-abi",
-  "version": "0.6.5",
+  "name": "easy-abi",
+  "version": "0.0.1",
   "description": "Decoder and encoder for the Ethereum ABI",
   "main": "index.js",
   "dependencies": {
@@ -22,18 +22,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/axic/ethereumjs-abi.git"
+    "url": "git+https://github.com/pouladzade/easy-abi.git"
   },
   "keywords": [
     "ethereum",
     "ABI"
   ],
-  "author": "Alex Beregszaszi <alex@rtfs.hu>",
+  "author": "Ahmad Pouladzadeh <pouladzade@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/axic/ethereumjs-abi/issues"
+    "url": "https://github.com/pouladzade/easy-abi/issues"
   },
-  "homepage": "https://github.com/axic/ethereumjs-abi",
+  "homepage": "https://github.com/pouladzade/easy-abi",
   "standard": {
     "globals": [
       "describe",
