@@ -1,16 +1,17 @@
-# ethereumjs-abi
-
-[![NPM Package](https://img.shields.io/npm/v/ethereumjs-abi.svg?style=flat-square)](https://www.npmjs.org/package/ethereumjs-abi)
-[![Build Status](https://img.shields.io/travis/ethereumjs/ethereumjs-abi.svg?branch=master&style=flat-square)](https://travis-ci.org/ethereumjs/ethereumjs-abi)
-[![Coverage Status](https://img.shields.io/coveralls/ethereumjs/ethereumjs-abi.svg?style=flat-square)](https://coveralls.io/r/ethereumjs/ethereumjs-abi)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![Gitter](https://img.shields.io/gitter/room/ethereum/ethereumjs-lib.svg?style=flat-square)](https://gitter.im/ethereum/ethereumjs-lib) or #ethereumjs on freenode
-
-
-Module implementing the [Ethereum ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) in Javascript. Can be used with RPC libraries for communication or with ethereumjs-vm to implement a fully fledged simulator.
+# easy-abi
 
 ## Usage
+#### Encoding and decoding aided by the JSON ABI definition
+```js
+var  abi = [{"constant":false,"inputs":[{"name":"val","type":"int256"}],"name":"setVal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"getVal","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]
 
+var encoded = ABI.encode(abi,"setVal",[1234]);
+
+console.log(encoded.toString("hex"));
+
+Output :
+5362f8a200000000000000000000000000000000000000000000000000000000000004d2
+```
 #### Manual encoding and decoding
 
 There are three methods of interest:
@@ -30,29 +31,6 @@ var encoded = abi.rawEncode([ "address" ], [ "0x00000000000000000000000000000000
 var decoded = abi.rawDecode([ "address" ], data)
 ```
 
-#### Encoding and decoding aided by the JSON ABI definition
-
-Planned for the future is supporting the JSON ABI definition:
-```js
-var  abi = [{"constant":false,"inputs":[{"name":"val","type":"int256"}],"name":"setVal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"getVal","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]
-
-var encoded = ABI.encode(abi,"setVal",[1234]);
-
-console.log(encoded.toString("hex"));
-
-Output :
-5362f8a200000000000000000000000000000000000000000000000000000000000004d2
-```js
-
-var abi = require('ethereumjs-abi')
-
-// need to have the ABI definition in JSON as per specification
-var tokenAbi = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"type":"function"},{"inputs":[],"type":"constructor"}]
-
-var encoded = abi.encode(tokenAbi, "balanceOf(uint256 address)", [ "0x0000000000000000000000000000000000000000" ])
-
-var decoded = abi.decode(tokenAbi, "balanceOf(uint256 address)", data)
-```
 
 #### Simple encoding and decoding
 
