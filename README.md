@@ -17,6 +17,7 @@ There are three methods of interest:
 - ```methodID``` to create a function signature
 - ```rawEncode``` to encode fields and
 - ```rawDecode``` to decode fields
+- ```Encode```   to create full ABI format 
 
 Example code:
 ```js
@@ -32,8 +33,17 @@ var decoded = abi.rawDecode([ "address" ], data)
 #### Encoding and decoding aided by the JSON ABI definition
 
 Planned for the future is supporting the JSON ABI definition:
-
 ```js
+var  abi = [{"constant":false,"inputs":[{"name":"val","type":"int256"}],"name":"setVal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"getVal","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]
+
+var encoded = ABI.encode(abi,"setVal",[1234]);
+
+console.log(encoded.toString("hex"));
+
+Output :
+5362f8a200000000000000000000000000000000000000000000000000000000000004d2
+```js
+
 var abi = require('ethereumjs-abi')
 
 // need to have the ABI definition in JSON as per specification
