@@ -787,3 +787,215 @@ describe('decoding (uint[][3], uint)', function () {
     assert.equal(a[0][2][1].toString(10), 6)
   })
 })
+
+describe('encoding using ABI Json (int256)', function () {
+  it('should work', function () {
+    var json_abi = [
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'val',
+            'type': 'int256'
+          }
+        ],
+        'name': 'setVal',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      },
+      {
+        'constant': false,
+        'inputs': [],
+        'name': 'getVal',
+        'outputs': [
+          {
+            'name': '',
+            'type': 'int256'
+          }
+        ],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      }
+    ]
+
+    var encoded = abi.encode(json_abi, 'setVal', [new BN('123456789123456789', 10)])
+    assert.equal(encoded.toString('hex'), '5362f8a200000000000000000000000000000000000000000000000001b69b4bacd05f15')
+  })
+})
+
+describe('encoding using ABI Json (string)', function () {
+  it('should work', function () {
+    var json_abi = [
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'a',
+            'type': 'int256'
+          }
+        ],
+        'name': 'setA',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      },
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'a',
+            'type': 'int256'
+          },
+          {
+            'name': 'b',
+            'type': 'string'
+          },
+          {
+            'name': 'c',
+            'type': 'bytes8'
+          }
+        ],
+        'name': 'setABC',
+        'outputs': [
+          {
+            'name': '',
+            'type': 'int256'
+          },
+          {
+            'name': '',
+            'type': 'string'
+          },
+          {
+            'name': '',
+            'type': 'bytes8'
+          }
+        ],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      },
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'b',
+            'type': 'string'
+          }
+        ],
+        'name': 'setB',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      },
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'c',
+            'type': 'bytes8'
+          }
+        ],
+        'name': 'setC',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      }
+    ]
+
+    var encoded = abi.encode(json_abi, 'setB', ['salam halet khoobe'])
+
+    assert.equal(encoded.toString('hex'), 'b5e7bc600000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001273616c616d2068616c6574206b686f6f62650000000000000000000000000000')
+  })
+})
+
+describe('encoding using ABI Json (int256,string,bytes8)', function () {
+  it('should work', function () {
+    var json_abi = [
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'a',
+            'type': 'int256'
+          }
+        ],
+        'name': 'setA',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      },
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'a',
+            'type': 'int256'
+          },
+          {
+            'name': 'b',
+            'type': 'string'
+          },
+          {
+            'name': 'c',
+            'type': 'bytes8'
+          }
+        ],
+        'name': 'setABC',
+        'outputs': [
+          {
+            'name': '',
+            'type': 'int256'
+          },
+          {
+            'name': '',
+            'type': 'string'
+          },
+          {
+            'name': '',
+            'type': 'bytes8'
+          }
+        ],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      },
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'b',
+            'type': 'string'
+          }
+        ],
+        'name': 'setB',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      },
+      {
+        'constant': false,
+        'inputs': [
+          {
+            'name': 'c',
+            'type': 'bytes8'
+          }
+        ],
+        'name': 'setC',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
+      }
+    ]
+    var encoded = abi.encode(json_abi, 'setABC', [12, 'salam', [1, 2, 3, 4, 5, 6, 7, 8]])
+    assert.equal(encoded.toString('hex'), 'f77a13e1000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000600102030405060708000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000573616c616d000000000000000000000000000000000000000000000000000000')
+  })
+})
