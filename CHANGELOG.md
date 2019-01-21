@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 (modification: no type change headlines) and this project adheres to 
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.6] - 2019-01-16
+
+- Include size of fixed-size array in offset for dynamic type,
+  PR [#60](https://github.com/ethereumjs/ethereumjs-abi/pull/60)
+- Replaced problematic for..in loops with C-style loops,
+  PR [#68](https://github.com/ethereumjs/ethereumjs-abi/pull/68)
+- Updated `ethereumjs-util` dependency to `v5.0.0`, 
+  PR [#59](https://github.com/ethereumjs/ethereumjs-abi/pull/59)
+- Run CI tests on currently supported Node versions,
+  PR [#61](https://github.com/ethereumjs/ethereumjs-abi/pull/61)
+
+[0.6.6]: https://github.com/ethereumjs/ethereumjs-abi/compare/v0.6.5...v0.6.6
+
 ## [0.6.5] - 2017-12-07
 - Fix tight packing for ``ABI.soliditySHA3``
 - Fix ``ABI.solidityPack`` early return on bytes32 input
