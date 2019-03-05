@@ -196,6 +196,16 @@ it('decoding address with leading 0', function () {
 
 // Homebrew decoding tests
 
+describe('decoding non-Buffer', function () {
+  it('should throw error', function () {
+    try {
+      abi.rawDecode([ 'uint32' ], 'hello')
+    } catch (error) {
+      assert.equal(error.message, 'expect data to be Buffer')
+    }
+  })
+})
+
 describe('decoding uint32', function () {
   it('should equal', function () {
     var a = abi.rawDecode([ 'uint32' ], new Buffer('000000000000000000000000000000000000000000000000000000000000002a', 'hex'))
