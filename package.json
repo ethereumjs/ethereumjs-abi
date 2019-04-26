@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.3",
+    "husky": "^2.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^6.0.2",
     "standard": "^12.0.1"
@@ -19,6 +20,11 @@
     "lint": "standard",
     "prepublish": "npm run lint && npm run test",
     "test": "istanbul test _mocha -- --reporter spec"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
