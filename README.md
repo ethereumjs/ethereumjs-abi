@@ -131,6 +131,12 @@ I am more than happy to receive improvements. Please send me a pull request or r
 
 There is a lot missing, grep for *FIXME* in the source code to find inspiration.
 
+## EthereumJS
+
+See our organizational [documentation](https://ethereumjs.readthedocs.io) for an introduction to `EthereumJS` as well as information on current standards and best practices.
+
+If you want to join for work or do improvements on the libraries have a look at our [contribution guidelines](https://ethereumjs.readthedocs.io/en/latest/contributing.html).
+
 ## License
 
     Copyright (C) 2015 Alex Beregszaszi
