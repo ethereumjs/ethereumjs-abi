@@ -511,6 +511,61 @@ describe('solidity tight packing multiple arguments', function () {
   })
 })
 
+describe('solidity tight packing uint32[]', function () {
+  it('should equal', function () {
+    var a = abi.solidityPack(
+      ['uint32[]'],
+      [[8, 9]]
+    )
+    var b = '00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000009'
+    assert.strict.equal(a.toString('hex'), b.toString('hex'))
+  })
+})
+
+describe('solidity tight packing bool[][]', function () {
+  it('should equal', function () {
+    let a = abi.solidityPack(
+      ['bool[][]'],
+      [[[true, false], [false, true]]]
+    )
+    let b = '0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001'
+    assert.strict.equal(a.toString('hex'), b.toString('hex'))
+  })
+})
+
+describe('solidity tight packing address[]', function () {
+  it('should equal', function () {
+    let a = abi.solidityPack(
+      ['address[]'],
+      [[new BN('43989fb883ba8111221e89123897538475893837', 16)]]
+    )
+    let b = '00000000000000000000000043989fb883ba8111221e89123897538475893837'
+    assert.strict.equal(a.toString('hex'), b.toString('hex'))
+  })
+})
+
+describe('solidity tight packing uint32[2]', function () {
+  it('should equal', function () {
+    let a = abi.solidityPack(
+      ['uint32[2]'],
+      [[11, 12]]
+    )
+    let b = '000000000000000000000000000000000000000000000000000000000000000b000000000000000000000000000000000000000000000000000000000000000c'
+    assert.strict.equal(a.toString('hex'), b.toString('hex'))
+  })
+})
+
+describe('solidity tight packing uint32[2] with wrong array length', function () {
+  it('should throw', function () {
+    assert.throws(function () {
+      abi.solidityPack(
+        ['uint32[2]'],
+        [[11, 12, 13]]
+      )
+    })
+  })
+})
+
 describe('solidity tight packing sha3', function () {
   it('should equal', function () {
     var a = abi.soliditySHA3(
