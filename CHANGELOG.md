@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 (modification: no type change headlines) and this project adheres to 
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.8] - 2019-08-13
+
+- Added support for arrays in Solidity tight packing `ABI.solidityPack()`
+  function, PR [#82](https://github.com/ethereumjs/ethereumjs-abi/pull/82)
+
+[0.6.8]: https://github.com/ethereumjs/ethereumjs-abi/compare/v0.6.7...v0.6.8
+
 ## [0.6.7] - 2019-03-18
 
 - Added support/CI testing for Node 10, 11, 
