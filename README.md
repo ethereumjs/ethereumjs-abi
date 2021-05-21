@@ -1,6 +1,6 @@
-This library is **deprecated** and will not be further maintained. It specifically doesn't support the new `ABI v2` which is now activated as the default ABI encoder starting with [Solidity v0.8.0](https://docs.soliditylang.org/en/latest/080-breaking-changes.html) released in December 2020. 
+This library is **deprecated** and will not be further maintained. It specifically doesn't support the new `ABI Coder v2` which is now activated by default starting with [Solidity v0.8.0](https://docs.soliditylang.org/en/latest/080-breaking-changes.html) released in December 2020. 
 
-We recommend to use the [Ethers.js v5 ABI Encoder](https://docs.ethers.io/v5/api/utils/abi/) as a replacement which supports the new `ABI v2` standard and is under active development.
+We recommend to use the [Ethers.js v5 ABI Encoder](https://docs.ethers.io/v5/api/utils/abi/) as a replacement which supports the new `ABI Coder v2` types and is under active development.
 
 ---
 
