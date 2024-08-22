@@ -129,7 +129,7 @@ var encoded = abi.rawEncode(abi.fromSerpent("i"), [ "0x0000000000000000000000000
 var decoded = abi.rawDecode([...abi.fromSerpent("i"), ...abi.fromSerpent("i")], data)
 ```
 
-Note: Serpent uses arbitary binary fields. If you want to store strings it is preferable to ensure it is stored as UTF8. `Buffer.from(<string>, 'utf8')` can be used to ensure it is properly encoded.
+Note: Serpent uses arbitrary binary fields. If you want to store strings it is preferable to ensure it is stored as UTF8. `Buffer.from(<string>, 'utf8')` can be used to ensure it is properly encoded.
 
 ## Contributing
 
